@@ -16,6 +16,14 @@
     "lib": [
       "es2017",
       "dom"
-    ]
+    ],
+    "paths": {
+      "laravel-passport": [
+        "dist/laravel-passport"
+      ],
+      "laravel-passport/*": [
+        "dist/laravel-passport/*"
+      ]
+    }
   }
 }

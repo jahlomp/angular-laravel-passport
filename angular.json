@@ -125,6 +125,46 @@
           }
         }
       }
+    },
+    "laravel-passport": {
+      "root": "projects/laravel-passport",
+      "sourceRoot": "projects/laravel-passport/src",
+      "projectType": "library",
+      "prefix": "ng",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-ng-packagr:build",
+          "options": {
+            "tsConfig": "projects/laravel-passport/tsconfig.lib.json",
+            "project": "projects/laravel-passport/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "project": "projects/laravel-passport/ng-package.prod.json"
+            }
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/laravel-passport/src/test.ts",
+            "tsConfig": "projects/laravel-passport/tsconfig.spec.json",
+            "karmaConfig": "projects/laravel-passport/karma.conf.js"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "projects/laravel-passport/tsconfig.lib.json",
+              "projects/laravel-passport/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
     }
   },
   "defaultProject": "angular-laravel"
