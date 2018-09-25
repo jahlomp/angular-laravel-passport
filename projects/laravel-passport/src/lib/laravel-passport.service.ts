@@ -12,9 +12,7 @@ import { map } from 'rxjs/operators';
 })
 export class LaravelPassportService {
 
-  constructor(@Inject(LaravelPassportConfigService) private config: LaravelPassportConfig, private http: HttpClient) {
-    console.log(config);
-  }
+  constructor(@Inject(LaravelPassportConfigService) private config: LaravelPassportConfig, private http: HttpClient) { }
 
   loginWithEmailAndPassword(email: string, password: string): Observable<any> {
     const url = `${this.config.apiRoot}/oauth/token`;
@@ -36,5 +34,21 @@ export class LaravelPassportService {
 
   logout() {
     localStorage.removeItem('ngLaravelPassport');
+  }
+
+  getTokenType() {
+    return localStorage.getItem('token_type');
+  }
+
+  getExpiresIn() {
+    return localStorage.getItem('expires_in');
+  }
+
+  getAccessToken() {
+    return localStorage.getItem('access_token');
+  }
+
+  getRefreshToken() {
+    return localStorage.getItem('refresh_token');
   }
 }
