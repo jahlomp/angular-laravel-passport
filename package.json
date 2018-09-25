@@ -1,5 +1,5 @@
 {
-  "name": "angular-laravel",
+  "name": "angular-laravel-passport",
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
