@@ -1,5 +1,5 @@
 {
-  "name": "@bittoday/laravel-passport",
+  "name": "laravel-passport",
   "version": "0.0.1",
   "peerDependencies": {
     "@angular/common": "^6.0.0-rc.0 || ^6.0.0",
@@ -11,7 +11,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/bittoday/angular-laravel-passport.git"
+    "url": "git+https://github.com/jahlomp/angular-laravel-passport.git"
   },
   "keywords": [
     "angular",
@@ -21,8 +21,8 @@
   "author": "Precious Jahlom Agboado",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/bittoday/angular-laravel-passport/issues"
+    "url": "https://github.com/jahlomp/angular-laravel-passport/issues"
   },
-  "homepage": "https://github.com/bittoday/angular-laravel-passport#readme",
+  "homepage": "https://github.com/jahlomp/angular-laravel-passport#readme",
   "description": ""
 }

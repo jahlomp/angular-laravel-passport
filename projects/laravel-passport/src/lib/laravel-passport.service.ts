@@ -37,18 +37,18 @@ export class LaravelPassportService {
   }
 
   getTokenType() {
-    return localStorage.getItem('token_type');
+    return JSON.parse(localStorage.getItem('ngLaravelPassport')).token_type;
   }
 
   getExpiresIn() {
-    return localStorage.getItem('expires_in');
+    return JSON.parse(localStorage.getItem('ngLaravelPassport')).expires_in;
   }
 
   getAccessToken() {
-    return localStorage.getItem('access_token');
+    return JSON.parse(localStorage.getItem('ngLaravelPassport')).access_token;
   }
 
   getRefreshToken() {
-    return localStorage.getItem('refresh_token');
+    return JSON.parse(localStorage.getItem('ngLaravelPassport')).refresh_token;
   }
 }

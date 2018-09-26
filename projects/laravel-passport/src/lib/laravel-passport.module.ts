@@ -1,5 +1,4 @@
 import { NgModule, ModuleWithProviders } from '@angular/core';
-import { LaravelPassportComponent } from './laravel-passport.component';
 import { LaravelPassportService } from './laravel-passport.service';
 import { LaravelPassportConfig } from './laravel-passport-config';
 import { LaravelPassportConfigService } from './laravel-passport-config.service';
@@ -12,8 +11,8 @@ import { HttpClientModule } from '@angular/common/http';
     CommonModule,
     HttpClientModule,
   ],
-  declarations: [LaravelPassportComponent],
-  exports: [LaravelPassportComponent]
+  declarations: [],
+  exports: []
 })
 export class LaravelPassportModule {
   static forRoot(config: LaravelPassportConfig): ModuleWithProviders {
