@@ -12,6 +12,8 @@ import { map } from 'rxjs/operators';
 })
 export class LaravelPassportService {
 
+  redirectUrl: string;
+
   constructor(@Inject(LaravelPassportConfigService) private config: LaravelPassportConfig, private http: HttpClient) { }
 
   loginWithEmailAndPassword(email: string, password: string): Observable<any> {
