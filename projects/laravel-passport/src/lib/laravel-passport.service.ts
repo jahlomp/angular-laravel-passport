@@ -32,23 +32,27 @@ export class LaravelPassportService {
     );
   }
 
+  isUserLoggedIn(): boolean {
+    return Boolean(this.getTokenType() && this.getExpiresIn() && this.getAccessToken() && this.getRefreshToken());
+  }
+
   logout() {
     localStorage.removeItem('ngLaravelPassport');
   }
 
-  getTokenType() {
+  getTokenType(): string {
     return JSON.parse(localStorage.getItem('ngLaravelPassport')).token_type;
   }
 
-  getExpiresIn() {
+  getExpiresIn(): number {
     return JSON.parse(localStorage.getItem('ngLaravelPassport')).expires_in;
   }
 
-  getAccessToken() {
+  getAccessToken(): string {
     return JSON.parse(localStorage.getItem('ngLaravelPassport')).access_token;
   }
 
-  getRefreshToken() {
+  getRefreshToken(): string {
     return JSON.parse(localStorage.getItem('ngLaravelPassport')).refresh_token;
   }
 }
