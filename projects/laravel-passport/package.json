@@ -24,5 +24,9 @@
     "url": "https://github.com/jahlomp/angular-laravel-passport/issues"
   },
   "homepage": "https://github.com/jahlomp/angular-laravel-passport#readme",
-  "description": ""
+  "description": "",
+  "dependencies": {
+    "moment": "^2.22.2"
+  },
+  "devDependencies": {}
 }

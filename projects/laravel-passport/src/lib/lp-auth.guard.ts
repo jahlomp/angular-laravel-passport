@@ -21,7 +21,7 @@ export class LPAuthGuard implements CanActivate {
   }
 
   checkLogin(url: string): boolean {
-    if (this.laravelPassportService.isUserLoggedIn()) { return true; }
+    if (this.laravelPassportService.isLoggedIn()) { return true; }
 
     // Store the attempted URL for redirecting
     this.laravelPassportService.redirectUrl = url;

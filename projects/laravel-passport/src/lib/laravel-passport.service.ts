@@ -1,11 +1,11 @@
 import { Injectable, Inject } from '@angular/core';
 import { LaravelPassportConfigService } from './laravel-passport-config.service';
-import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { EmailPasswordLoginConfig } from './email-password-login-config';
 import { LaravelPassportConfig } from './laravel-passport-config';
-import { map } from 'rxjs/operators';
-
+import { Observable } from 'rxjs';
+import { tap, shareReplay } from 'rxjs/operators';
+import * as moment from 'moment';
 
 @Injectable({
   providedIn: 'root'
@@ -26,39 +26,52 @@ export class LaravelPassportService {
       password: password,
       scope: ''
     };
-    return this.http.post(url, emailPasswordLoginConfig).pipe(
-      map(res => {
-        localStorage.setItem('ngLaravelPassport', JSON.stringify(res));
-        return res;
-      })
-    );
+    return this.http.post(url, emailPasswordLoginConfig)
+      .pipe(
+        tap(res => this.setSession),
+        shareReplay());
   }
 
-  isUserLoggedIn(): boolean {
-    return Boolean(this.getTokenType() && this.getExpiresIn() && this.getAccessToken() && this.getRefreshToken());
+  private setSession(authResult) {
+    const expiresAt = moment().add(authResult.expires_in, 'second');
+
+    localStorage.setItem('access_token', authResult.access_token);
+    localStorage.setItem('refresh_token', authResult.refresh_token);
+    localStorage.setItem('token_type', authResult.token_type);
+    localStorage.setItem('expires_in', JSON.stringify(expiresAt.valueOf()));
   }
+
 
   logout() {
-    localStorage.removeItem('ngLaravelPassport');
+    localStorage.removeItem('access_token');
+    localStorage.removeItem('refresh_token');
+    localStorage.removeItem('token_type');
+    localStorage.removeItem('expires_in');
   }
 
-  getTokenType(): string {
-    const ngLaravelPassport = JSON.parse(localStorage.getItem('ngLaravelPassport'));
-    return ngLaravelPassport ? ngLaravelPassport.token_type : '';
+  isLoggedIn(): boolean {
+    return moment().isBefore(this.getExpiration());
   }
 
-  getExpiresIn(): number {
-    const ngLaravelPassport = JSON.parse(localStorage.getItem('ngLaravelPassport'));
-    return ngLaravelPassport ? ngLaravelPassport.expires_in : 0;
+  isLoggedOut(): boolean {
+    return !this.isLoggedIn();
   }
 
   getAccessToken(): string {
-    const ngLaravelPassport = JSON.parse(localStorage.getItem('ngLaravelPassport'));
-    return ngLaravelPassport ? ngLaravelPassport.access_token : '';
+    return localStorage.getItem('access_token');
   }
 
   getRefreshToken(): string {
-    const ngLaravelPassport = JSON.parse(localStorage.getItem('ngLaravelPassport'));
-    return ngLaravelPassport ? ngLaravelPassport.refresh_token : '';
+    return localStorage.getItem('refresh_token');
+  }
+
+  getTokenType(): string {
+    return localStorage.getItem('token_type');
+  }
+
+  getExpiration() {
+    const expiration = localStorage.getItem('expires_in');
+    const expiresAt = JSON.parse(expiration);
+    return moment(expiresAt);
   }
 }
