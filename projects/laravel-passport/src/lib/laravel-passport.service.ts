@@ -5,7 +5,8 @@ import { EmailPasswordLoginConfig } from './email-password-login-config';
 import { LaravelPassportConfig } from './laravel-passport-config';
 import { Observable } from 'rxjs';
 import { tap, shareReplay } from 'rxjs/operators';
-import * as moment from 'moment';
+import * as moment_ from 'moment';
+const moment = moment_;
 
 @Injectable({
   providedIn: 'root'
@@ -50,6 +51,10 @@ export class LaravelPassportService {
   }
 
   isLoggedIn(): boolean {
+    return moment().isBefore(this.getExpiration());
+  }
+
+  isUserLoggedIn(): boolean {
     return moment().isBefore(this.getExpiration());
   }
 

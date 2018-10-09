@@ -3,5 +3,8 @@
   "dest": "../../dist/laravel-passport",
   "lib": {
     "entryFile": "src/public_api.ts"
-  }
+  },
+  "whitelistedNonPeerDependencies": [
+    "moment"
+  ]
 }
